@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Canvas边界限制演示</title>
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+        #fps {
+            position: fixed;
+            top: 12px;
+            left: 12px;
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        #canvas {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div id="fps">FPS: 0</div>
+    <canvas id="canvas"></canvas>
+
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        const fpsElement = document.getElementById('fps');
+
+        // 视口尺寸管理
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        // 小球类
+        class Ball {
+            constructor() {
+                this.size = 5;
+                this.reset();
+                this.setRandomTarget();
+            }
+
+            reset() {
+                this.x = Math.random() * (canvas.width - this.size);
+                this.y = Math.random() * (canvas.height - this.size);
+            }
+
+            setRandomTarget() {
+                this.targetX = Math.random() * (canvas.width - this.size);
+                this.targetY = Math.random() * (canvas.height - this.size);
+            }
+
+            update() {
+                this.x += (this.targetX - this.x) * 0.1;
+                this.y += (this.targetY - this.y) * 0.1;
+            }
+        }
+
+        // 创建小球实例
+        const BALL_COUNT = 10000;
+        const balls = Array.from({ length: BALL_COUNT }, () => new Ball());
+
+        // 定期更新目标位置
+        setInterval(() => balls.forEach(b => b.setRandomTarget()), 800);
+
+        // 颜色动画参数
+        let hue = 0;
+        const HUE_SPEED = 0.4; // 色相变化速度（度/帧）
+
+        // 动画循环
+        let lastFrame = 0;
+        function animate(timestamp) {
+            const deltaTime = timestamp - lastFrame;
+            lastFrame = timestamp;
+
+            // 更新色相
+            hue = (hue + HUE_SPEED) % 360;
+
+            // 清除画布
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // 绘制所有小球
+            balls.forEach(ball => {
+                ball.update();
+                
+                // 创建渐变
+                const gradient = ctx.createLinearGradient(
+                    ball.x, ball.y,
+                    ball.x + ball.size, ball.y + ball.size
+                );
+                gradient.addColorStop(0, `hsl(${hue}, 100%, 50%)`);
+                gradient.addColorStop(1, `hsl(${(hue + 120) % 360}, 100%, 50%)`);
+
+                // 绘制圆形
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(
+                    ball.x + ball.size/2,
+                    ball.y + ball.size/2,
+                    ball.size/2,
+                    0,
+                    Math.PI * 2
+                );
+                ctx.fill();
+            });
+
+            // 更新FPS显示
+            fpsElement.textContent = `FPS: ${Math.round(1000 / deltaTime)}`;
+            
+            requestAnimationFrame(animate);
+        }
+
+        // 启动动画
+        requestAnimationFrame(animate);
+    </script>
+</body>
+</html>
