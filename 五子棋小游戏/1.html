@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .wuziqi {
+            border: 1px solid #000;
+            margin: 50px auto;
+            width: fit-content;
+            display: grid;
+            grid-template-columns: repeat(14, 30px);
+            grid-template-rows: repeat(14, 30px);
+            position: relative;
+            background-color: burlywood;
+            box-sizing: border-box;
+        }
+
+        .wuziqi .ge {
+            border: 1px solid #000;
+        }
+
+        .wuziqi .zi {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            position: absolute;
+            left: 0;
+            pointer-events: none;
+            top: 0;
+        }
+
+        .wuziqi .zi[data-status="0"] {
+            cursor: pointer;
+            background-color: #fff;
+            box-shadow: inset 1px 1px 3px 0px #00000049;
+        }
+
+        .wuziqi .zi[data-status="1"] {
+            cursor: pointer;
+            background-color: #000000;
+            box-shadow: inset 1px 1px 3px 0px #f9f9f9ba;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wuziqi">
+
+    </div>
+    <script>
+        let gameOver = false;
+
+        function check_win(zi, arr) {
+            if (arr.length === 0) return false;
+            const last = arr[arr.length - 1];
+            const x = last.x;
+            const y = last.y;
+            const status = last.status;
+
+
+            const posMap = {};
+            arr.forEach(item => {
+                posMap[`${item.x},${item.y}`] = item.status;
+            });
+
+            const directions = [
+                [[-1, 0], [1, 0]],
+                [[0, -1], [0, 1]],
+                [[-1, -1], [1, 1]],
+                [[-1, 1], [1, -1]]
+            ];
+
+            for (const [dir1, dir2] of directions) {
+                let count = 1;
+
+                let i = 1;
+                while (true) {
+                    const nx = x + dir1[0] * i;
+                    const ny = y + dir1[1] * i;
+                    if (posMap[`${nx},${ny}`] === status) {
+                        count++;
+                        i++;
+                    } else {
+                        break;
+                    }
+                }
+
+
+                i = 1;
+                while (true) {
+                    const nx = x + dir2[0] * i;
+                    const ny = y + dir2[1] * i;
+                    if (posMap[`${nx},${ny}`] === status) {
+                        count++;
+                        i++;
+                    } else {
+                        break;
+                    }
+                }
+
+
+                if (count >= 5) {
+                    alert(`${status === 0 ? '白方' : '黑方'}胜利！`);
+                    return true;
+                }
+            }
+            return false;
+        }
+        function create_pan(ele, size = 14 ** 2) {
+            for (i = 0; i < size; i++) {
+                const ge = document.createElement("div")//创建
+                ge.classList.add("ge")
+                let x = 0;//点击坐标
+                let y = 0;//点击坐标
+                ge.dataset.index = i;//索引
+                ele.appendChild(ge);//添加
+                ge.addEventListener('click', (event) => {
+                    if (gameOver) {
+                        alert('游戏已结束！');
+                        return;
+                    }
+                    //获取点击坐标
+                    const rect = ge.getBoundingClientRect();
+                    const clickX = event.clientX - rect.left;
+                    const clickY = event.clientY - rect.top;
+                    const index = ge.getAttribute('data-index');
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    x = (clickX < centerX) ? index % 14 : index % 14 + 1;
+                    y = (clickY < centerY) ? Math.floor(index / 14) : Math.floor(index / 14) + 1;
+                    //创建棋子
+                    const exists = array_pan.some(obj => obj.x === x && obj.y === y);
+                    if (exists) {
+                        alert('该位置已有棋子')
+                        return;
+                    }
+                    const zi = document.createElement("div");
+                    zi.classList.add("zi");
+                    zi.style.left = `${x * 30 - 10}px`;
+                    zi.style.top = `${y * 30 - 10}px`;
+                    ele.appendChild(zi);
+                    let status = array_pan.length > 0 ? +!array_pan[array_pan.length - 1].status : 0;
+                    zi.dataset.status = status;
+                    array_pan.push({
+                        x: x,
+                        y: y,
+                        status: status
+                    });
+                    setTimeout(() => {
+                        if (check_win(zi, array_pan)) {
+                            gameOver = true;
+                        }
+                    }, 200)
+
+
+                    console.log(array_pan);
+                });
+
+            }
+        }
+
+        let wuziqi = document.getElementsByClassName("wuziqi")[0];
+        create_pan(wuziqi);
+        const array_pan = [];
+        let status = 0;
+
+    </script>
+</body>
+
+</html>

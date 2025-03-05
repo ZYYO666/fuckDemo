@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>五子棋游戏</title>
+    <style>
+        canvas {
+            border: 1px solid #000;
+        }
+
+        .info {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">当前玩家：<span id="current-player">黑棋</span></div>
+    <canvas id="chessboard" width="450" height="450"></canvas>
+    <button onclick="resetGame()">重新开始</button>
+
+    <script>
+        const canvas = document.getElementById('chessboard');
+        const ctx = canvas.getContext('2d');
+        const cellSize = 30;
+        const boardSize = 15; 
+        let board = []; 
+        let currentPlayer = 1; 
+        let gameOver = false;
+
+
+        function initBoard() {
+            for (let i = 0; i < boardSize; i++) {
+                board[i] = [];
+                for (let j = 0; j < boardSize; j++) {
+                    board[i][j] = 0;
+                }
+            }
+        }
+
+
+        function drawChessboard() {
+            ctx.fillStyle = '#DEB887';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.strokeStyle = '#000';
+            for (let i = 0; i < boardSize; i++) {
+            
+                ctx.beginPath();
+                ctx.moveTo(i * cellSize + cellSize / 2, cellSize / 2);
+                ctx.lineTo(i * cellSize + cellSize / 2, canvas.height - cellSize / 2);
+                ctx.stroke();
+
+               
+                ctx.beginPath();
+                ctx.moveTo(cellSize / 2, i * cellSize + cellSize / 2);
+                ctx.lineTo(canvas.width - cellSize / 2, i * cellSize + cellSize / 2);
+                ctx.stroke();
+            }
+        }
+
+        // 绘制棋子
+        function drawPiece(x, y, player) {
+            const centerX = x * cellSize + cellSize / 2;
+            const centerY = y * cellSize + cellSize / 2;
+            const radius = cellSize / 2 - 2;
+
+            // 创建径向渐变
+            const gradient = ctx.createRadialGradient(
+                centerX - radius / 3,
+                centerY - radius / 3,
+                radius / 4,
+                centerX,
+                centerY,
+                radius
+            );
+
+            // 根据玩家设置不同颜色方案
+            if (player === 1) {
+                // 黑棋渐变
+                gradient.addColorStop(0, '#666');
+                gradient.addColorStop(0.5, '#222');
+                gradient.addColorStop(1, '#000');
+            } else {
+                // 白棋渐变
+                gradient.addColorStop(0, '#FFF');
+                gradient.addColorStop(0.5, '#EEE');
+                gradient.addColorStop(1, '#DDD');
+            }
+
+            // 绘制主体
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
+
+            // 添加阴影
+            ctx.shadowColor = 'rgba(0, 0, 0, 0.3)';
+            ctx.shadowBlur = 8;
+            ctx.shadowOffsetX = 2;
+            ctx.shadowOffsetY = 2;
+
+            ctx.fillStyle = gradient;
+            ctx.fill();
+
+            // 绘制边框
+            ctx.lineWidth = 2;
+            ctx.strokeStyle = player === 1 ? '#333' : '#999';
+            ctx.stroke();
+
+            // 添加高光
+            ctx.beginPath();
+            ctx.arc(
+                centerX - radius / 3,
+                centerY - radius / 3,
+                radius / 3,
+                0.25 * Math.PI,
+                1.25 * Math.PI
+            );
+            ctx.fillStyle = player === 1
+                ? 'rgba(255, 255, 255, 0.3)'
+                : 'rgba(255, 255, 255, 0.6)';
+            ctx.fill();
+
+          
+            ctx.beginPath();
+            ctx.arc(
+                centerX - radius / 4,
+                centerY - radius / 4,
+                radius / 6,
+                0,
+                Math.PI * 2
+            );
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+            ctx.fill();
+
+        
+            ctx.shadowColor = 'transparent';
+        }
+
+        // 检查是否胜利
+        function checkWin(x, y) {
+            const directions = [
+                [1, 0],  // 水平
+                [0, 1],  // 垂直
+                [1, 1],  // 右下
+                [1, -1] // 右上
+            ];
+
+            for (let [dx, dy] of directions) {
+                let count = 1;
+
+                // 向正方向检查
+                let i = x + dx, j = y + dy;
+                while (i >= 0 && i < boardSize && j >= 0 && j < boardSize && board[i][j] === currentPlayer) {
+                    count++;
+                    i += dx;
+                    j += dy;
+                }
+
+                // 向反方向检查
+                i = x - dx;
+                j = y - dy;
+                while (i >= 0 && i < boardSize && j >= 0 && j < boardSize && board[i][j] === currentPlayer) {
+                    count++;
+                    i -= dx;
+                    j -= dy;
+                }
+
+                if (count >= 5) return true;
+            }
+            return false;
+        }
+
+        // 处理点击事件
+        canvas.addEventListener('click', (e) => {
+            if (gameOver) return;
+
+            const rect = canvas.getBoundingClientRect();
+            const x = Math.floor((e.clientX - rect.left) / cellSize);
+            const y = Math.floor((e.clientY - rect.top) / cellSize);
+
+            if (x >= 0 && x < boardSize && y >= 0 && y < boardSize && board[x][y] === 0) {
+                board[x][y] = currentPlayer;
+                drawPiece(x, y, currentPlayer);
+
+                if (checkWin(x, y)) {
+                    gameOver = true;
+                    alert(`${currentPlayer === 1 ? '黑棋' : '白棋'}获胜！`);
+                } else {
+                    currentPlayer = currentPlayer === 1 ? 2 : 1;
+                    document.getElementById('current-player').textContent =
+                        currentPlayer === 1 ? '黑棋' : '白棋';
+                }
+            }
+        });
+
+        function resetGame() {
+            initBoard();
+            currentPlayer = 1;
+            gameOver = false;
+            document.getElementById('current-player').textContent = '黑棋';
+            drawChessboard();
+        }
+
+        // 初始化游戏
+        initBoard();
+        drawChessboard();
+    </script>
+</body>
+
+</html>
