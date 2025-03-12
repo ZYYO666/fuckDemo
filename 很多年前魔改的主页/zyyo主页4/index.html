@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="renderer" content="webkit">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <script type="text/javascript" src="/static/pixi.min.js"></script>
+  <script type="text/javascript" src="/static/main.js"></script>
+  <link rel="stylesheet" href="https://zyyo.net/usr/themes/ZYYO/static/css/font.css">
+  <title>ZYYO</title>
+  <style>
+  @keyframes animate {
+
+            0%,
+            25% {
+                text-shadow: 2px 2px 2px #ff6384;
+                
+                font-size: 1.4rem;
+            }
+
+            50% {
+                text-shadow: 2px -2px 2px #ff6384;
+                font-size: 1.8rem;
+            }
+
+            75% {
+                text-shadow: -2px 2px 2px #ff6384;
+                font-size: 1.4rem;
+            }
+
+            100% {
+                text-shadow: -2px -2px 2px #ff6384;
+                font-size: 1.8rem;
+            }
+        }
+         @keyframes animatea {
+
+            0%,
+            25% {
+                box-shadow:0 0px 20px 5px #e6e8ea;
+            }
+
+            50% {
+                box-shadow:0 0px 180px 15px #ff1a9c;
+            }
+
+            75% {
+               box-shadow:0 0px 20px 5px #e6e8ea;
+            }
+
+            100% {
+              box-shadow:0 0px 180px 15px #002bff;
+            }
+        }
+@keyframes rotate {
+        0% {
+            transform: rotate(0);
+           
+        }
+
+        25% {
+            transform: rotate(90deg);
+            
+             
+        }
+
+        50% {
+            transform: rotate(180deg);
+            
+        }
+
+        75% {
+            transform: rotate(270deg);
+          
+        }
+
+        100% {
+            transform: rotate(360deg);
+             
+        }
+    }
+@keyframes upAnimation {
+    0% {
+        transform: rotate(0deg);
+        transition-timing-function: cubic-bezier(0.215, .61, .355, 1)
+    }
+
+    10% {
+        transform: rotate(-12deg);
+        transition-timing-function: cubic-bezier(0.215, .61, .355, 1)
+    }
+
+    20% {
+        transform: rotate(12deg);
+        transition-timing-function: cubic-bezier(0.215, .61, .355, 1)
+    }
+
+    28% {
+        transform: rotate(-10deg);
+        transition-timing-function: cubic-bezier(0.215, .61, .355, 1)
+    }
+
+    36% {
+        transform: rotate(10deg);
+        transition-timing-function: cubic-bezier(0.755, .5, .855, .06)
+    }
+
+    42% {
+        transform: rotate(-8deg);
+        transition-timing-function: cubic-bezier(0.755, .5, .855, .06)
+    }
+
+    48% {
+        transform: rotate(8deg);
+        transition-timing-function: cubic-bezier(0.755, .5, .855, .06)
+    }
+
+    52% {
+        transform: rotate(-4deg);
+        transition-timing-function: cubic-bezier(0.755, .5, .855, .06)
+    }
+
+    56% {
+        transform: rotate(4deg);
+        transition-timing-function: cubic-bezier(0.755, .5, .855, .06)
+    }
+
+    60% {
+        transform: rotate(0deg);
+        transition-timing-function: cubic-bezier(0.755, .5, .855, .06)
+    }
+
+    100% {
+        transform: rotate(0deg);
+        transition-timing-function: cubic-bezier(0.215, .61, .355, 1)
+    }
+}
+
+
+canvas {
+      display: block;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: -2;
+      pointer-events: none
+    }
+a:hover,
+a:link,
+a:visited,
+a:active,
+a:focus {
+    text-decoration: none;
+   
+}
+
+button,
+input,
+input:focus {
+    outline: none;
+    border: none;
+
+}
+
+a,
+button,
+input {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+*{
+
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* 其他浏览器 */
+}
+
+    * {
+      box-sizing: border-box;
+      -webkit-text-size-adjust: none
+    }
+
+    img {
+      border: 0;
+      vertical-align: middle
+    }
+
+
+    body {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100vw;
+    background: radial-gradient(#619bff, #e0e0e3);
+}
+
+    .main {
+      width: 35%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    @media screen and (max-width:1024px) {
+      .main {
+        width: 45%;
+      }
+    }
+
+    @media screen and (max-width:768px) {
+      .main {
+        width: 50%;
+      }
+    }
+
+    @media screen and (max-width:540px) {
+      .main {
+        width: 60% !important;
+      }
+    }
+
+    @media screen and (max-width:480px) {
+      .main {
+        width: 90% !important;
+      }
+    }
+
+    @media screen and (max-width:360px) {
+      .main {
+        width: 100% !important;
+      }
+    }
+
+
+    img {
+      border: 3px solid rgba(255, 255, 255, 0.8);
+      border-radius: 50%;
+      box-shadow:0 0px 20px 5px #e6e8ea;
+      transition: .4s ease-in-out;
+       animation: animatea 1s linear infinite, rotate 2s linear infinite;
+       
+    }
+
+    h1 {
+  animation:upAnimation 0.5s linear infinite, animate 0.5s linear infinite;
+  font-family: 'Noto Serif SC', serif;
+      color: #fff;
+      font-size: 1.8rem;
+      line-height: 6rem;
+      font-weight: 800;
+      margin: 0;
+    }
+
+    h2 {
+      margin: 0;
+      color: #ffffffa3;
+      padding-bottom: 45px;
+      font-size: 18px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      position: relative;
+      list-style-type: none;
+      display: -ms-inline-flexbox;
+      display: inline-flex;
+      width: 100%;
+      -ms-flex-pack: distribute;
+      justify-content: space-around;
+      border-bottom: 2px solid hsla(0, 0%, 100%, .1);
+      border-top: 2px solid hsla(0, 0%, 100%, .1);
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 85%
+    }
+
+    li {
+      display: flex;
+      transition: all .2s;
+      width: 100%;
+      border-left: 1px solid hsla(0, 0%, 100%, .1);
+      border-right: 1px solid hsla(0, 0%, 100%, .1);
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center
+    }
+
+    a {
+      font-size: 1.2rem;
+      color: #ffffff;
+      transition: all .2s;
+     
+      cursor: pointer;
+    }
+
+    a:hover {
+      color: #fff !important;
+       text-shadow:0 0px 20px  #ffffff;
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <div class="main">
+
+    <img src="https://q1.qlogo.cn/g?b=qq&nk=3509679579&s=5" width="130" height="130" alt="avatar">
+    <h1>张扬YO</h1>
+    <h2>Born by design</h2>
+
+    <ul>
+      <li><a href="https://zyyo.net"><span>博客</span></a></li>
+      <li><a href="https://a.zyyo.cc"><span>实验</span></a></li>
+      <li><a href="https://p.zyyo.cc"><span>云盘</span></a></li>
+      <li><a href="https://ai.zyyo.cc"><span>GPT</span></a></li>
+    </ul>
+
+  </div>
+</body>
+<script>
+//按键触发 
+ 
+ document.onkeydown = function(){
+            //禁止 ctrl+u
+            if (event.ctrlKey && window.event.keyCode==85){
+                return false;
+            }
+            //禁止 F12
+            if (window.event && window.event.keyCode == 123) {
+                event.keyCode = 0;
+                event.returnValue = false;
+            }
+     }
+ 
+   //如果还要禁止其他键的话搜 window.event.keyCode的对照表
+ 
+ 
+//网站禁止右键
+        document.body.oncontextmenu = function() {
+            self.event.returnValue=false
+        };
+ 
+// 禁用右键菜单、复制、选择
+     $(document).bind("contextmenu copy selectstart", function() {
+            return false;
+     });
+ 
+</script>
+</html>
