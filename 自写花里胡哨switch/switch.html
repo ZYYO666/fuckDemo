@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #deecf1;
+            transition: background-color 0.5s ease;
+        }
+
+        body.active {
+            background-color: #2e2e2f;
+        }
+
+        .Switch {
+            display: flex;
+            position: relative;
+            aspect-ratio: 5/2;
+            height: 100px;
+            align-items: center;
+            border-radius: 10000px;
+            box-shadow: inset 0px 0px 10px 0px #39393954;
+            overflow: hidden;
+            background-color: #6b86d2;
+        }
+
+        .Switch.active {
+            background-color: #142656;
+        }
+
+
+        .Switch .day {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            right: 0;
+            top: 0;
+            transition: top 0.5s ease;
+        }
+
+        .Switch.active .day {
+            top: 100%;
+        }
+
+
+        .Switch .day .cloud1,
+        .Switch .day .cloud2 {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .Switch .day .cloud2 {
+
+            transition: transform 0.5s ease 0.55s;
+            transform: translateY(-20%);
+            opacity: 0.50;
+        }
+
+        .Switch.active .day .cloud2 {
+
+            transform: translateY(0%);
+        }
+
+        .Switch .day .circle {
+            height: 50%;
+            aspect-ratio: 1/1;
+            border-radius: 50%;
+            position: absolute;
+            background-color: #fff;
+            background-blend-mode: normal;
+        }
+
+        .Switch .day .circle:nth-child(6),
+        .Switch .day .circle:nth-child(1) {
+            height: 90%;
+            bottom: -10%;
+            right: -40%;
+        }
+
+        .Switch .day .circle:nth-child(7),
+        .Switch .day .circle:nth-child(2) {
+            height: 70%;
+            bottom: -10%;
+            right: 10%;
+        }
+
+        .Switch .day .circle:nth-child(8),
+        .Switch .day .circle:nth-child(3) {
+            height: 50%;
+            bottom: -10%;
+            right: 50%;
+        }
+
+        .Switch .day .circle:nth-child(9),
+        .Switch .day .circle:nth-child(4) {
+            bottom: -10%;
+            height: 50%;
+            right: 70%;
+        }
+
+        .Switch .day .circle:nth-child(10),
+        .Switch .day .circle:nth-child(5) {
+            bottom: -20%;
+            height: 40%;
+            right: 100%;
+        }
+
+        .Switch .day .circle:nth-child(1),
+        .Switch .day .circle:nth-child(2),
+        .Switch .day .circle:nth-child(3),
+        .Switch .day .circle:nth-child(4),
+        .Switch .day .circle:nth-child(5) {
+            z-index: 2;
+        }
+
+
+
+
+
+
+
+        .Switch .night {
+            width: 50%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: -100%;
+            transition: top 0.5s ease;
+        }
+
+        .Switch.active .night {
+            top: 0;
+        }
+
+        .Switch .night svg {
+            fill: #fff;
+            position: absolute;
+            animation: star 1s infinite ease;
+        }
+
+        @keyframes star {
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.5;
+                transform: scale(0.5);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+        .Switch .night svg:nth-child(1) {
+            width: 10%;
+            top: 10%;
+            left: 15%;
+            animation-delay: 0.3s;
+        }
+
+        .Switch .night svg:nth-child(2) {
+            width: 8%;
+            top: 25%;
+            left: 40%;
+            animation-delay: 0.3s;
+        }
+
+        .Switch .night svg:nth-child(3) {
+            width: 9%;
+            top: 50%;
+            left: 10%;
+            animation-delay: 3s;
+        }
+
+        .Switch .night svg:nth-child(4) {
+            width: 7%;
+            top: 5%;
+            left: 70%;
+            animation-delay: 0.3s;
+        }
+
+        .Switch .night svg:nth-child(5) {
+            width: 12%;
+            top: 40%;
+            left: 60%;
+            animation-delay: 3s;
+        }
+
+        .Switch .night svg:nth-child(6) {
+            width: 8%;
+            top: 30%;
+            left: 80%;
+            animation-delay: 0.3s;
+        }
+
+        .Switch .night svg:nth-child(7) {
+            width: 10%;
+            top: 80%;
+            left: 20%;
+            animation-delay: 3s;
+        }
+
+        .Switch .night svg:nth-child(8) {
+            width: 9%;
+            top: 60%;
+            left: 50%;
+            animation-delay: 0.3s;
+        }
+
+
+
+
+
+
+        .Switch .point {
+            position: relative;
+            height: 80%;
+            aspect-ratio: 1 / 1;
+            background-color: rgb(234, 176, 15);
+            border-radius: 50%;
+            transition: background-color 0.5s ease, margin-left 0.5s ease, transform 0.5s ease;
+            margin-left: 5%;
+            box-shadow: inset 10px 10px 5px #ffffff6e, inset -10px -10px 5px #00000022;
+            z-index: 3;
+        }
+
+        .Switch.active .point {
+            background-color: #61aefff2;
+            margin-left: 95%;
+            transform: translateX(-100%) rotate(45deg);
+
+        }
+
+        .Switch .point>.circle {
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            border-radius: 50%;
+            filter: blur(3px);
+            z-index: 1;
+            background: #ffffff5a;
+        }
+
+        .Switch .point>.circle::before {
+            position: absolute;
+            content: '';
+            width: 250%;
+            height: 250%;
+            top: -75%;
+            left: -75%;
+            border-radius: 50%;
+            filter: blur(3px);
+            background: #ffffff20;
+            z-index: 1;
+        }
+
+        .Switch .point>.circle::after {
+            position: absolute;
+            content: '';
+            width: 300%;
+            height: 300%;
+            top: -100%;
+            left: -100%;
+            border-radius: 50%;
+            filter: blur(3px);
+            background: #ffffff18;
+            z-index: 1;
+        }
+
+        .Switch .point>.point1 {
+            position: absolute;
+            aspect-ratio: 1/1;
+            opacity: 0;
+            background-color: #ffffff00;
+            border-radius: 50%;
+            transition: opacity 0.5s ease;
+            box-shadow: inset 0px -1px 4px 1px #0000001c;
+            z-index: 2;
+        }
+
+        .Switch.active .point>.point1 {
+            opacity: 1;
+        }
+
+        .Switch .point>.point1:nth-child(1) {
+            width: 35%;
+            left: 10%;
+            top: 40%;
+        }
+
+        .Switch .point>.point1:nth-child(2) {
+            width: 25%;
+            left: 50%;
+            top: 25%;
+        }
+
+        .Switch .point>.point1:nth-child(3) {
+            width: 20%;
+            left: 60%;
+            bottom: 20%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .Switch {
+                height: 80px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .Switch {
+                height: 60px;
+            }
+        }
+
+        /* 添加暗黑模式支持 */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #2e2e2f;
+            }
+            
+            body.active {
+                background-color: #deecf1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="Switch" role="switch" tabindex="0" aria-checked="false">
+        <div class="point">
+            <div class="point1"></div>
+            <div class="point1"></div>
+            <div class="point1"></div>
+            <div class="circle"></div>
+        </div>
+
+        <div class="night">
+            <svg t="1733241977883" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="6315">
+                <path
+                    d="M43.17184 514.56l354.870613-104.372907L512.853333 44.878507l109.796694 359.8848 359.8848 109.796693-344.436054 93.938347-125.24544 375.743146-125.248853-375.743146z"
+                    p-id="6316"></path>
+            </svg>
+            <svg t="1733241977883" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="6315">
+                <path
+                    d="M43.17184 514.56l354.870613-104.372907L512.853333 44.878507l109.796694 359.8848 359.8848 109.796693-344.436054 93.938347-125.24544 375.743146-125.248853-375.743146z"
+                    p-id="6316"></path>
+            </svg>
+            <svg t="1733241977883" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="6315">
+                <path
+                    d="M43.17184 514.56l354.870613-104.372907L512.853333 44.878507l109.796694 359.8848 359.8848 109.796693-344.436054 93.938347-125.24544 375.743146-125.248853-375.743146z"
+                    p-id="6316"></path>
+            </svg>
+            <svg t="1733241977883" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="6315">
+                <path
+                    d="M43.17184 514.56l354.870613-104.372907L512.853333 44.878507l109.796694 359.8848 359.8848 109.796693-344.436054 93.938347-125.24544 375.743146-125.248853-375.743146z"
+                    p-id="6316"></path>
+            </svg>
+            <svg t="1733241977883" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="6315">
+                <path
+                    d="M43.17184 514.56l354.870613-104.372907L512.853333 44.878507l109.796694 359.8848 359.8848 109.796693-344.436054 93.938347-125.24544 375.743146-125.248853-375.743146z"
+                    p-id="6316"></path>
+            </svg>
+            <svg t="1733241977883" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="6315">
+                <path
+                    d="M43.17184 514.56l354.870613-104.372907L512.853333 44.878507l109.796694 359.8848 359.8848 109.796693-344.436054 93.938347-125.24544 375.743146-125.248853-375.743146z"
+                    p-id="6316"></path>
+            </svg>
+            <svg t="1733241977883" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="6315">
+                <path
+                    d="M43.17184 514.56l354.870613-104.372907L512.853333 44.878507l109.796694 359.8848 359.8848 109.796693-344.436054 93.938347-125.24544 375.743146-125.248853-375.743146z"
+                    p-id="6316"></path>
+            </svg>
+            <svg t="1733241977883" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"
+                p-id="6315">
+                <path
+                    d="M43.17184 514.56l354.870613-104.372907L512.853333 44.878507l109.796694 359.8848 359.8848 109.796693-344.436054 93.938347-125.24544 375.743146-125.248853-375.743146z"
+                    p-id="6316"></path>
+            </svg>
+
+        </div>
+        <div class="day">
+            <div class="cloud1">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="cloud2">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+
+
+        </div>
+    </div>
+    <script>
+        const mySwitch = document.querySelector('.Switch');
+        const body = document.querySelector('body');
+        mySwitch.addEventListener('click', function () {
+            this.classList.toggle('active');
+            body.classList.toggle('active');
+        })
+    </script>
+</body>
+
+</html>

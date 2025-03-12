@@ -1,0 +1,431 @@
+
+<!doctype html>
+<html>
+<link rel="stylesheet" href="https://zyyo.net/usr/themes/ZYYO/static/css/font.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<head>
+    <meta charset="utf-8">
+    <title>Zy-Start</title>
+    <style>
+        a:hover,
+        a:link,
+        a:visited,
+        a:active,
+        button,
+        input,
+        input:focus {
+            outline: none;
+            border: none;
+
+        }
+
+        .logo {
+            font-family: 'Noto Serif SC', serif;
+        }
+
+        body {
+
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            overflow: hidden;
+            background-size: cover;
+            background-position: center;
+            background-image: url(http://8.130.45.186:81/bj.jpg);
+
+        }
+
+        @keyframes fadeIn {
+            from {
+                background-color: rgba(0, 0, 0, 1);
+            }
+
+            to {
+                background-color: rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        .main {
+            background-color: rgba(0, 0, 0, 1);
+            animation: fadeIn 2.5s forwards;
+            height: 100vh;
+            width: 100vw;
+            position: static;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: .1s;
+            backdrop-filter: blur(0px);
+        }
+
+        .main-selected {
+            height: 100vh;
+            width: 100vw;
+            backdrop-filter: blur(20px);
+
+        }
+
+        .gd {
+            width: 100%;
+            height: 220px;
+            display: flex;
+            position: relative;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .header-bar {
+            height: 80px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .icon1 {
+            position: absolute;
+            right: 30px;
+        }
+
+        .icon2 {
+            position: absolute;
+            left: 30px;
+        }
+
+        .logo {
+            font-size: 22px;
+            line-height: 22px;
+            font-weight: 620;
+            color: #ffffff;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            transition: .25s;
+
+        }
+
+
+        .logo:hover {
+            font-size: 30px;
+        }
+
+        .search:hover {
+            background: rgba(255, 255, 255, 0.7);
+            width: 40%;
+        }
+
+
+
+        .search-input::placeholder {
+            color: #3b3b3b;
+        }
+
+        .search {
+            width: 25%;
+            height: 46px;
+            bottom: 0px;
+            background: rgba(255, 255, 255, 0.5);
+            box-shadow: rgba(1, 1, 1, 0.1) 0 0 10px;
+            border-radius: 30px;
+            backdrop-filter: blur(20px);
+            font-size: 16px;
+            transition: .2s;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding: 0 10px;
+            position: absolute;
+            bottom: 0;
+        }
+
+        .search-selected {
+            bottom: 20px;
+        }
+
+        .search-btu {
+            width: 20%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0);
+            border-radius: 30px;
+            font-size: 16px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+        }
+
+        .search-input {
+            width: 80%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0);
+            border-radius: 30px;
+            font-size: 18px;
+            color: #3b3b3b;
+            text-align: center;
+
+        }
+
+        .content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            overflow-y: auto;
+            width: 100%;
+            height: 100%;
+            padding: 20px;
+            margin-top: 50px;
+            box-sizing: border-box;
+
+        }
+
+        .app-list-1 {
+            width: 25%;
+            height: 100%;
+
+        }
+
+        .app-list-2 {
+            width: 40%;
+            height: 100%;
+            flex-wrap: wrap;
+            display: flex;
+            justify-content: center;
+            align-content: flex-start;
+
+        }
+
+        .app-icon {
+            margin: 10px;
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+            background-color: #ffffffe2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+
+        }
+
+        .app-icon img {
+
+            border-radius: 10px;
+            height: 32px;
+            width: 32px;
+        }
+
+        .app-list-3 {
+            width: 25%;
+            height: 100%;
+
+
+        }
+
+        .footer {
+
+            height: 80px;
+            width: 100%;
+            display: flex;
+            color: #ffffff;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @media (max-width: 800px) {
+            .search {
+                width: 65%;
+            }
+
+            .app-list-2 {
+                width: 100%;
+            }
+
+            .app-list-3,
+            .app-list-1 {
+                display: none;
+            }
+
+            .search:hover {
+
+                width: 72%;
+
+            }
+
+            .main-selected {
+                height: 100vh;
+                width: 100vw;
+                backdrop-filter: blur(20px);
+
+            }
+
+            .search-selected {
+                bottom: 0px;
+
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <div class="gd">
+            <div class="header-bar">
+                <span class="logo">Zy-start</span>
+                <div class="icon1"><svg t="1697275392763" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="887" width="33px" height="33px">
+                        <path
+                            d="M651.264 142.336c45.568 0 88.064 24.576 111.104 64l139.264 241.664c23.04 39.424 23.04 88.576 0 128l-139.264 241.664c-23.04 39.424-65.024 64-111.104 64H372.736c-45.568 0-88.064-24.576-111.104-64l-139.264-241.664c-23.04-39.424-23.04-88.576 0-128l139.264-241.664c23.04-39.424 65.024-64 111.104-64h278.528z m0 64H372.736c-23.04 0-44.032 12.288-55.296 31.744L177.664 480.256c-11.264 19.968-11.264 44.032 0 64l139.264 241.664c11.264 19.968 32.768 31.744 55.296 31.744h279.04c23.04 0 44.032-12.288 55.296-31.744l139.264-241.664c11.264-19.968 11.264-44.032 0-64L706.56 238.592c-11.264-19.968-32.256-32.256-55.296-32.256zM512 394.752c65.024 0 117.248 52.736 117.248 117.248 0 65.024-52.736 117.248-117.248 117.248-65.024 0-117.248-52.736-117.248-117.248S446.976 394.752 512 394.752z m0 64c-29.696 0-53.248 24.064-53.248 53.248 0 29.696 24.064 53.248 53.248 53.248 29.696 0 53.248-24.064 53.248-53.248 0-29.696-24.064-53.248-53.248-53.248z"
+                            fill="#ffffff" p-id="888"></path>
+                    </svg></div>
+                <div class="icon2"> <svg t="1697278549281" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="947" width="24px" height="24px">
+                        <path fill="#ffffff"
+                            d="M337.249467 51.393074H80.69503c-43.842968 0-80.451847 36.608879-80.451847 87.759009v255.896792c0 43.842968 36.608879 80.378776 80.451847 80.378776h256.554437c51.296273 0 80.59799-36.535807 80.59799-80.378776V139.152083c7.307161-51.15013-36.608879-87.759009-80.59799-87.759009z m659.398245 153.596533L820.837409 22.164428c-29.301717-29.228646-87.905152-29.228646-117.279941 0L520.366932 204.989607c-29.301717 29.228646-29.301717 87.685937 0 116.914583l175.956446 182.752106c29.301717 29.228646 87.905152 29.228646 117.206869 0l175.883376-182.752106c43.91604-29.228646 43.91604-87.685937 7.234089-116.914583zM337.249467 599.722466H80.69503c-43.842968 0-80.451847 36.535807-80.451847 87.759009v255.823721A81.109492 81.109492 0 0 0 80.69503 1023.757043h256.554437c51.296273 0 80.59799-36.535807 80.59799-80.451847V687.481475c7.307161-51.223201-36.608879-87.759009-80.59799-87.759009z m549.498538 0H637.646872c-51.296273 0-80.59799 36.535807-80.59799 80.451847v255.823721C549.741721 987.221236 586.350599 1023.757043 637.646872 1023.757043h256.481366c51.223201 0 80.59799-36.535807 80.59799-80.451847V687.481475c0-51.223201-36.608879-87.759009-87.978223-87.759009z"
+                            p-id="948"></path>
+                    </svg>
+                </div>
+            </div>
+
+            <div class="search">
+                <input type="text" onblur="toggleBodyClass()" onfocus="toggleBodyClass()" class="search-input"
+                    name="word" size="30" placeholder="搜索" autocomplete="off">
+                <div class="search-btu"><svg t="1697155204314" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                        xmlns="http://www.w3.org/2000/svg" p-id="947" width="20px" height="20px">
+                        <path fill="#ffffff"
+                            d="M512 1024A512 512 0 1 1 512 0a512 512 0 0 1 0 1024zM512 146.285714a365.714286 365.714286 0 1 0 0.073143 731.501715A365.714286 365.714286 0 0 0 512 146.285714z m0 585.142857a219.428571 219.428571 0 1 1 0-438.857142 219.428571 219.428571 0 0 1 0 438.857142z"
+                            p-id="948"></path>
+                    </svg>
+                </div>
+            </div>
+        </div>
+        <div class="content">
+
+            <div class="app-list-1">
+            </div>
+
+            <div class="app-list-2">
+
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+                <div class="app-icon">
+
+                    <img src="https://q1.qlogo.cn/g?b=qq&amp;nk=3509679579&amp;s=5">
+                </div>
+
+            </div>
+
+
+            <div class="app-list-3">
+            </div>
+
+
+        </div>
+
+        <div class="footer">
+            备案号：豫ICP备2023015852号-2
+        </div>
+
+    </div>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+</body>
+
+<script>
+    function toggleBodyClass() {
+        var bodyElement = document.querySelector('.main');
+        bodyElement.classList.toggle('main-selected');
+        var logoElement = document.querySelector('.search');
+        logoElement.classList.toggle('search-selected');
+    }
+</script>
+
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .lbt {
+            width: 300px;
+            height: 200px;
+            margin: 100px auto;
+            overflow: hidden;
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .lbt1 {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            transition: transform 0.5s ease;
+        }
+
+        .lbt1 img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lbt .prev,
+        .lbt .next {
+            position: absolute;
+            padding: auto;
+            top: 50%;
+            z-index: 1;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgb(4, 142, 255);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lbt .prev {
+            left: 20px;
+        }
+
+        .lbt .next {
+            right: 20px;
+        }
+
+        .lbt .points {
+            position: absolute;
+            bottom: 20px;
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .lbt .point {
+            width: 10px;
+            height: 10px;
+            border: 2px solid rgb(255, 255, 255);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .lbt .point.active {
+            background-color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="lbt">
+        <div class="prev">《</div>
+        <div class="next">》</div>
+        <div class="points">
+        </div>
+        <div class="lbt1">
+            <img draggable="false"
+                src="https://www4.bing.com//th?id=OHR.GuanacosChile_ZH-CN7011761081_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                alt="" srcset="">
+            <img draggable="false"
+                src="https://www4.bing.com//th?id=OHR.GuanacosChile_ZH-CN7011761081_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                alt="" srcset="">
+            <img draggable="false"
+                src="https://www4.bing.com//th?id=OHR.GuanacosChile_ZH-CN7011761081_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                alt="" srcset="">
+            <img draggable="false"
+                src="https://www4.bing.com//th?id=OHR.GuanacosChile_ZH-CN7011761081_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                alt="" srcset="">
+            <img draggable="false"
+                src="https://www4.bing.com//th?id=OHR.GuanacosChile_ZH-CN7011761081_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                alt="" srcset="">
+            <img draggable="false"
+                src="https://www4.bing.com//th?id=OHR.GuanacosChile_ZH-CN7011761081_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                alt="" srcset="">
+        </div>
+    </div>
+</body>
+<script>
+    let lbt = document.querySelector('.lbt');
+    let lbt1 = document.querySelector('.lbt1');
+    let prev = document.querySelector('.prev');
+    let next = document.querySelector('.next');
+    let points = document.querySelector('.points');
+    let imglength = document.querySelectorAll('.lbt .lbt1 img').length;
+    let index = 1;
+
+
+    //初始化小圆点
+    function initPoint() {
+        for (let i = 0; i < imglength; i++) {
+            let point = document.createElement('div');
+            point.classList.add('point');
+            points.appendChild(point);
+        }
+        document.querySelector('.point').classList.add('active');
+    }
+
+    //更新轮播图
+    function updata(index) {
+        document.querySelector('.point.active').classList.remove('active');
+        let point = document.querySelectorAll('.point');
+        point[index - 1].classList.add('active');
+        lbt1.style.transform = 'translateX(-' + (index - 1) * 100 + '%)';
+    }
+
+    initPoint();
+    updata(index);
+
+    //点击上一个
+    prev.addEventListener('click', () => {
+        if (index == 1) {
+            return;
+        } else {
+            index--;
+            updata(index);
+        }
+    });
+
+    //点击下一个
+    next.addEventListener('click', () => {
+        if (index == imglength) {
+            return;
+        } else {
+            index++;
+            updata(index);
+        }
+    });
+
+    //点击小圆点
+    let point = document.querySelectorAll('.point');
+    point.forEach((v, i) => {
+        v.addEventListener('click', () => {
+            index = i + 1;
+            updata(index);
+        });
+    });
+
+    //定时自动播放
+    let timer = setInterval(() => next.click(), 1000);
+
+    lbt.addEventListener('mouseenter', () => clearInterval(timer));
+    lbt.addEventListener('mouseleave', () => {
+        timer = setInterval(() => next.click(), 1000);
+    });
+
+
+</script>
+
+</html>
