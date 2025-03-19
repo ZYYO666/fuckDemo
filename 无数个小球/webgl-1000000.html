@@ -165,7 +165,7 @@
         }
 
         // 创建小球
-        const BALL_COUNT = 5000000;  // 可以增加更多小球
+        const BALL_COUNT = 1000000;  // 可以增加更多小球
         const balls = Array.from({ length: BALL_COUNT }, () => new Ball());
         setInterval(() => balls.forEach(b => b.setRandomTarget()), 500);
 
