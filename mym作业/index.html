@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        body {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .nav {
+            width: 100%;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            z-index: 2;
+            background-color: #398dfa;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav .nav_container {
+            width: 100%;
+            flex-direction: flex;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav .right {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav .item {
+            width: 80px;
+            height: 100%;
+            color: inherit;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+
+        }
+
+        .nav .item:hover {
+            color: rgb(40, 104, 104);
+        }
+
+        .nav .logo {
+            height: 100%;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .lbt {
+            width: 100%;
+            height: 500px;
+            margin: 60px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .lbt1 {
+            width: 100vw;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            transition: transform 0.5s ease;
+        }
+
+        .lbt1 .item {
+            width: 100vw;
+            flex-shrink: 0;
+            height: 100%;
+            background-color: #333;
+
+        }
+
+        .lbt img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .lbt .prev,
+        .lbt .next {
+            position: absolute;
+            padding: auto;
+            top: 50%;
+            z-index: 1;
+            transform: translateY(-50%);
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background-color: rgb(4, 142, 255);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lbt .prev {
+            left: 20px;
+        }
+
+        .lbt .next {
+            right: 20px;
+        }
+
+        .lbt .points {
+            position: absolute;
+            bottom: 20px;
+            z-index: 1;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+        }
+
+        .lbt .point {
+            width: 10px;
+            height: 10px;
+            border: 2px solid rgb(255, 255, 255);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .lbt .point.active {
+            background-color: rgb(255, 255, 255);
+        }
+
+        .container {
+            width: 1200px;
+            margin: 100px auto;
+        }
+
+        .container h3 {
+            font-size: 26px;
+        }
+
+        .container h3 span {
+            font-size: 14px;
+            color: #505050;
+        }
+
+        .container ul {
+            display: flex;
+            /* 指定为容器 */
+            margin: 50px 0;
+            flex-wrap: wrap;
+            gap: 20px;
+
+        }
+
+        .container ul li {
+            background-color: #a0a0a016;
+            padding-bottom: 20px;
+            border-radius: 10px;
+            width: calc(25% - 20px);
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .container ul li .item {
+            height: 100px;
+            padding: 20px;
+        }
+
+        .container ul li a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .container ul li img {
+            width: 100%;
+            height: 200px;
+            /* 图片自适应父元素大小 */
+            height: auto;
+        }
+
+        .container ul li h4 {
+            font-size: 16px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+
+        .container ul li span {
+            font-size: 14px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav_container">
+            <a href="/" class="logo">
+                <h1>热映电影</h1>
+            </a>
+
+            <div class="right">
+                <a href="/" class="item">
+                    首页
+                </a>
+                <a href="./infor.html" class="item">
+                    影视列表
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="lbt">
+        <div class="prev">《</div>
+        <div class="next">》</div>
+        <div class="points">
+        </div>
+        <div class="lbt1">
+            <div class="item"><img draggable="false"
+                    src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                    alt="" srcset=""></div>
+            <div class="item"><img draggable="false"
+                    src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                    alt="" srcset=""></div>
+            <div class="item"><img draggable="false"
+                    src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                    alt="" srcset=""></div>
+            <div class="item"><img draggable="false"
+                    src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                    alt="" srcset=""></div>
+            <div class="item"><img draggable="false"
+                    src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                    alt="" srcset=""></div>
+
+        </div>
+    </div>
+    <div class="container">
+        <h3>
+            影片推荐
+            <span>更多></span>
+        </h3>
+        <ul>
+            <li>
+                <a href="./post.html" class="href">
+                    <img
+                        src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202">
+                    <div class="item">
+                        <h4>胜券在握</h4>
+                        <span>看职场爽文，打工人组团斗翻资本！</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="./post.html" class="href">
+                    <img
+                        src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202">
+                    <div class="item">
+                        <h4>胜券在握</h4>
+                        <span>看职场爽文，打工人组团斗翻资本！</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="./post.html" class="href">
+                    <img
+                        src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202">
+                    <div class="item">
+                        <h4>胜券在握</h4>
+                        <span>看职场爽文，打工人组团斗翻资本！</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="./post.html" class="href">
+                    <img
+                        src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202">
+                    <div class="item">
+                        <h4>胜券在握</h4>
+                        <span>看职场爽文，打工人组团斗翻资本！</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="./post.html" class="href">
+                    <img
+                        src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202">
+                    <div class="item">
+                        <h4>胜券在握</h4>
+                        <span>看职场爽文，打工人组团斗翻资本！</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="./post.html" class="href">
+                    <img
+                        src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202">
+                    <div class="item">
+                        <h4>胜券在握</h4>
+                        <span>看职场爽文，打工人组团斗翻资本！</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="./post.html" class="href">
+                    <img
+                        src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202">
+                    <div class="item">
+                        <h4>胜券在握</h4>
+                        <span>看职场爽文，打工人组团斗翻资本！</span>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="./post.html" class="href">
+                    <img
+                        src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202">
+                    <div class="item">
+                        <h4>胜券在握</h4>
+                        <span>看职场爽文，打工人组团斗翻资本！</span>
+                    </div>
+                </a>
+            </li>
+        </ul>
+
+    </div>
+</body>
+
+<script>
+    let lbt = document.querySelector('.lbt');
+    let lbt1 = document.querySelector('.lbt1');
+    let prev = document.querySelector('.prev');
+    let next = document.querySelector('.next');
+    let points = document.querySelector('.points');
+    let imglength = document.querySelectorAll('.lbt .lbt1 img').length;
+    let index = 0;
+
+
+    //初始化小圆点
+    function initPoint() {
+        for (let i = 0; i < imglength; i++) {
+            let point = document.createElement('div');
+            point.classList.add('point');
+            points.appendChild(point);
+        }
+        document.querySelector('.point').classList.add('active');
+    }
+
+    //更新轮播图
+    function updata(index) {
+        document.querySelector('.point.active').classList.remove('active');
+        let point = document.querySelectorAll('.point');
+        console.log(point);
+        point[index].classList.add('active');
+        lbt1.style.transform = 'translateX(-' + (index) * 100 + '%)';
+    }
+
+    initPoint();
+    updata(index);
+
+    //点击上一个
+    prev.addEventListener('click', () => {
+        if (index == 1) {
+            return;
+        } else {
+            index = (index - 1 + imglength) % imglength;
+            updata(index);
+        }
+    });
+
+    //点击下一个
+    next.addEventListener('click', () => {
+        if (index == imglength) {
+            return;
+        } else {
+            index = (index + 1 + imglength) % imglength;
+            updata(index);
+        }
+    });
+
+    //点击小圆点
+    let point = document.querySelectorAll('.point');
+    point.forEach((v, i) => {
+        v.addEventListener('click', () => {
+            updata(index);
+        });
+    });
+
+    //定时自动播放
+    let timer = setInterval(() => next.click(), 500);
+
+    lbt.addEventListener('mouseenter', () => clearInterval(timer));
+    lbt.addEventListener('mouseleave', () => {
+        timer = setInterval(() => next.click(), 800);
+    });
+
+
+</script>
+
+</html>

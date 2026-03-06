@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        ul,
+        li {
+            list-style: none;
+        }
+
+        body {
+            color: #333;
+            font-size: 14px;
+        }
+
+        .nav {
+            width: 100%;
+            height: 60px;
+            position: fixed;
+            top: 0;
+            z-index: 2;
+            background-color: #398dfa;
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .nav .nav_container {
+            width: 100%;
+            flex-direction: flex;
+            max-width: 1200px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav .right {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav .item {
+            width: 80px;
+            height: 100%;
+            color: inherit;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+
+        }
+
+        .nav .item:hover {
+            color: rgb(40, 104, 104);
+        }
+
+        .nav .logo {
+            height: 100%;
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .banner {
+            width: 100%;
+            height: 400px;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+
+        .container {
+            width: 1000px;
+            margin: 100px auto;
+        }
+
+        .container h1 {
+            font-size: 30px;
+        }
+
+        .container p {
+            font-size: 25px;
+
+            line-height: 40px;
+        }
+
+
+        .post_content {
+            width: 100%;
+            font-size: 1rem;
+            padding: 50px;
+            margin-bottom: 40px;
+            letter-spacing: normal;
+            line-height: 40px;
+        }
+
+        .post_content h1 {
+            margin: 10px 0;
+            display: inline-block;
+            font-size: 35px;
+            border-bottom: 5px solid var(--theme_color-50);
+        }
+
+        .post_content h2 {
+            margin: 10px 0;
+            display: inline-block;
+            font-size: 33px;
+            border-bottom: 5px solid var(--theme_color-50);
+        }
+
+        .post_content p {
+            font-size: 20px;
+        }
+
+        .post_content img {
+            max-height: 600px;
+            max-width: 100%;
+            display: block;
+            height: auto;
+            margin: 20px auto;
+            border-radius: 9px;
+            box-shadow: 5px 11px 20px 0px #0d0d0d26;
+        }
+
+
+
+
+
+
+
+        .post_content a {
+            color: var(--theme_color);
+            text-decoration: none;
+            transition: all 0.3s;
+            position: relative;
+            padding-left: 20px;
+
+
+        }
+
+        .post_content a::before {
+            content: '￥';
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            background-size: cover;
+            position: absolute;
+            left: 0;
+        }
+
+        .post_content a:hover {
+            color: #005f99;
+            border-color: #005f99;
+        }
+
+        .post_content strong {
+            font-weight: bold;
+            background: var(--theme_color-50);
+            padding: 5px;
+            font-size: 0.8rem;
+            color: var(--theme_color);
+            border-radius: 7px;
+            margin: 0 5px;
+        }
+
+        .post_content em {
+            font-style: italic;
+            color: #555;
+        }
+
+        .post_content ul,
+        .post_content ol {
+            margin: 1em 0;
+            padding-left: 2em;
+        }
+
+        .post_content ul li {
+            list-style-type: disc;
+            margin: 0.5em 0;
+        }
+
+        .post_content ol li {
+            list-style-type: decimal;
+            margin: 0.5em 0;
+        }
+
+
+        .post_content blockquote {
+            border-left: 4px solid #007acc;
+            padding-left: 1em;
+            margin: 1em 0;
+            font-style: italic;
+            color: #555;
+            background: #f7f9fb;
+        }
+
+
+
+        .post_content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1em 0;
+        }
+
+        .post_content th,
+        .post_content td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .post_content th {
+            background: #007acc;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .post_content tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+
+        .post_content hr {
+            border: 0;
+            border-top: 1px solid #ddd;
+            margin: 2em 0;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="nav">
+        <div class="nav_container">
+            <a href="/" class="logo">
+                <h1>热映电影</h1>
+            </a>
+
+            <div class="right">
+                <a href="/" class="item">
+                    首页
+                </a>
+                <a href="./infor.html" class="item">
+                    影视列表
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="banner">
+        <img src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+            alt="" srcset="">
+    </div>
+    <div class="container">
+        <div class="post_content">
+            <h1>
+                泰坦尼特号
+            </h1>
+            <h2>测试</h2>
+            <h3>测试</h3>
+            <p>
+                泰坦尼克号（RMS
+                Titanic），又译作铁达尼号，是英国白星航运公司下辖的一艘奥林匹克级邮轮，排水量46000吨，1909年3月31日在哈兰德与沃尔夫造船厂动工建造，1911年5月31日下水，1912年4月2日完工试航。
+                泰坦尼克号是当时世界上体积最庞大、内部设施最豪华的客运轮船，有“永不沉没”的美誉。在第一次航行中，它从英国南安普敦出发驶向美国纽约。1912年4月14日23时40分左右，泰坦尼克号与一座冰山相撞，造成右舷船艏至船中部破裂，五间水密舱进水。4月15日凌晨2时20分左右，泰坦尼克船体断裂成两截后沉入大西洋底3700米处。2224名船员及乘客中，1517人丧生，其中仅333具遇难者遗体被寻回。泰坦尼克号沉没事故为和平时期死伤人数最为惨重的一次海难，其残骸直至1985年才被再度发现，受到联合国教育、科学及文化组织的保护。
+                2021年7月2日，据美国哥伦比亚广播公司报道，船体一直在受到洋流和细菌的侵蚀，沉船“泰坦尼克”号的残骸正在逐渐消失。
+                [7]当地时间2022年8月30日，泰坦尼克号残骸高清分辨率视频发布，首次以8k分辨率展示船体。
+                [12]2023年2月，一段1986年拍摄的沉没于海底的泰坦尼克号残骸视频首次公开。 [14]
+                据英国广播公司2023年5月17日报道，英国深海测绘公司“麦哲伦”2022年夏天开展测绘工作。专业人员操控潜水器，共计耗时200多个小时，从各角度拍摄超过70万张图片，创建出这艘沉船的精确3D图像。 [15]
+                2024年9月2日，最新勘测显示，“泰坦尼克”号船头左舷一侧有一段约4.5米长的栏杆已经掉落。 [19]
+                中文名泰坦尼克号
+                外文名RMS Titanic
+                造船背景
+                
+            </p>
+            <h2>测试</h2>
+            <img src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                alt="" srcset="">
+            <p>
+                1845年，约翰·皮尔金顿（John Pilkington）和亨利·威尔逊（Henry Wilson）在英国利物浦创立了白星航运公司（White Star
+                Line），由于长期经营不善，导致公司资金周转困难，于1868年1月18日被托马斯·亨利·伊斯梅（Thomas Henry Ismay）掌握的国家航运公司（National Line）收购。
+                1899年，托马斯·伊斯梅去世，他的儿子约瑟夫·布鲁斯·伊斯梅（Joseph Bruce Ismay）接管家族企业，成为英国白星航运公司董事长。1901年，在老约翰·皮尔庞特·摩根（John Pierpont
+                Morgan Sr.，摩根大通的创始人）授意下，美国国际海运公司（International Mercantile
+                Marine）向白星航运公司发出邀约，提议将两家公司合并以扩大经营规模。伊斯梅对这项提议表示赞同，公司短短一年后便完成重组，成为国际海运公司的子公司。两年后，伊斯梅在老摩根的支持下成为了国际海运公司董事长。
+                在当时，白星航运公司最大的竞争对手是英国卡纳德航运公司（Carned
+                造船背景
+            </p>
+            <p>
+                <h2>测试</h2>
+                <img src="https://www4.bing.com//th?id=OHR.GreaterSnow2024_ZH-CN5929129591_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp&w=360&h=202"
+                    alt="" srcset="">
+                Line），在英国政府的资助下，卡纳德航运公司建造了两艘当时速度最快的超级邮轮——首次使用大型蒸汽轮机的卢西塔尼亚号和毛里塔尼亚号，还陆续开启了数条新航线，意欲同白星航运公司一争高下，这给后者的运营带来了很大的压力。不过，在国际海运公司庞大资金的支持下，白星航运公司决定迎头赶上。
+                1908年的一天晚上，伊斯梅前往哈兰德和沃尔夫公司（Harland & Wolff，现哈兰德与沃尔夫重工业公司）董事长威廉·皮尔里勋爵（William James Pirrie, 1st Viscount
+                Pirrie）位于伦敦贝尔格莱维亚区的大宅中共进晚餐。哈兰德和沃尔夫公司在当时是拥有近80年历史的老牌造船企业，从1871年起便是白星航运公司的忠诚合作伙伴。两人在谈话中说到了卡纳德公司的两艘新船，伊斯梅提议由位于贝尔法斯特的哈兰德和沃尔夫造船厂承建两艘空前巨大的邮轮，每艘有三座烟囱，吨位要超出卡纳德公司两艘新船15000吨左右，皮尔里对这个意见很感兴趣。
+            </p>
+        </div>
+    </div>
+</body>
+
+<script>
+
+
+</script>
+
+</html>
